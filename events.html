@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- BETA: keeps search engines from listing the beta URL. Remove when burns-lab.org goes live. -->
+<meta name="robots" content="noindex">
+<title>Events | Burns Lab</title>
+<meta name="description" content="Talks, conferences, and events from the Burns Lab at Loyola University Chicago.">
+<link rel="icon" href="images/logos/burns-lab-mark.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="images/logos/burns-lab-wordmark.png" alt="Burns Lab"></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="people.html">People</a>
+      <a href="events.html" aria-current="page">Events</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Photos for an event go in images/events/<slug>/; run scripts/update-events.sh
+       and they show up here. -->
+  <div class="wrap hero">
+    <h1>Events</h1>
+  </div>
+
+  <section class="band">
+    <div class="wrap">
+      <ol class="timeline" id="events">
+        <li class="event"><div class="when"></div><div><p>Loading events&hellip;</p></div></li>
+      </ol>
+      <details class="older">
+        <summary class="btn btn-ghost"><span class="show">Older events</span><span class="hide">Hide older events</span></summary>
+        <ol class="timeline" id="events-older"></ol>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="images/logos/burns-lab-mark.png" alt="">
+      <div>Burns Lab, Department of Biology, Loyola University Chicago<br>
+      Campus photos by Natalie Battaglia</div>
+    </div>
+    <div><a href="people.html">People</a> &middot; <a href="work.html">Work</a> &middot; <a href="index.html#contact">Contact</a></div>
+  </div>
+</footer>
+<script>
+// ---- settings ----------------------------------------------------------
+const RECENT_MONTHS = 24;  // events this recent are listed; older ones sit behind the button
+// ------------------------------------------------------------------------
+
+const since = new Date();
+since.setMonth(since.getMonth() - RECENT_MONTHS);
+const CUTOFF = since.toISOString().slice(0, 10);   // e.g. "2024-10-20"
+
+// Events come from data/events.json, newest first. Each entry takes:
+//   slug    names its photo folder, images/events/<slug>/
+//   date    sortable, YYYY-MM-DD
+//   display how the date should read on the page
+//   title, where, text
+//   link, linkText   optional link out to the event or a write-up
+//   photos  filled in by scripts/update-events.sh, do not edit by hand
+//   credit  optional caption under the photos
+//   hidden  true keeps an event in the file but off the page
+const eventRow = e => {
+  const photos = (e.photos || []).map(src =>
+    `<figure class="figure"><div class="frame"><img src="${src}" alt=""></div></figure>`).join("");
+  return `<li class="event">
+    <div class="when">${e.display}</div>
+    <div>
+      <h3>${e.title}</h3>
+      ${e.where ? `<p class="where">${e.where}</p>` : ""}
+      <p>${e.text}</p>
+      ${e.link ? `<p class="event-link"><a href="${e.link}">${e.linkText || "More about this event"}</a></p>` : ""}
+      ${photos ? `<div class="event-photos">${photos}</div>` : ""}
+      ${photos && e.credit ? `<p class="credit">${e.credit}</p>` : ""}
+    </div>
+  </li>`;
+};
+
+fetch("data/events.json")
+  .then(r => r.json())
+  .then(events => {
+    events = events.filter(e => !e.hidden);
+    events.sort((a, b) => b.date.localeCompare(a.date));
+    // recent events in the timeline, the rest behind the "Older events" button
+    const recent = events.filter(e => e.date >= CUTOFF);
+    const older = events.filter(e => e.date < CUTOFF);
+    document.getElementById("events").innerHTML = recent.length
+      ? recent.map(eventRow).join("")
+      : `<li class="event"><div class="when"></div><div><p>Nothing in the past ${RECENT_MONTHS} months.</p></div></li>`;
+    const olderList = document.getElementById("events-older");
+    olderList.innerHTML = older.map(eventRow).join("");
+    olderList.closest("details").hidden = older.length === 0;
+  })
+  .catch(() => {
+    document.getElementById("events").innerHTML =
+      '<li class="event"><div class="when"></div><div><p>Event list is temporarily unavailable.</p></div></li>';
+  });
+</script>
+
+</body>
+</html>

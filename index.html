@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!-- BETA: keeps search engines from listing the beta URL. Remove when burns-lab.org goes live. -->
+<meta name="robots" content="noindex">
+<title>Burns Lab</title>
+<meta name="description" content="The Burns Lab at Loyola University Chicago studies how microbial communities interact with human cancers and other diseases, and works on AI and human flourishing, character education, program assessment, and public science communication.">
+<link rel="icon" href="images/logos/burns-lab-mark.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;600&family=Public+Sans:wght@400;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html"><img src="images/logos/burns-lab-wordmark.png" alt="Burns Lab"></a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="work.html">Work</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="people.html">People</a>
+      <a href="events.html">Events</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero-photo">
+    <img class="hero-bg" src="images/campus/campus-aerial.jpg" alt="Aerial view of the Loyola University Chicago Lakeshore campus along Lake Michigan">
+    <div class="wrap hero-body">
+    <p class="eyebrow">Loyola University Chicago &middot; Department of Biology</p>
+    <h1>The Burns Lab</h1>
+    <p class="lede">We study the microbes that live in and on the human body and how they relate
+    to cancer and other diseases. We also run programs on AI, character education, and science
+    communication.</p>
+    <div class="actions">
+      <a class="btn btn-solid" href="work.html">Our work</a>
+      <a class="btn btn-ghost" href="#join">Join the lab</a>
+    </div>
+    </div>
+  </section>
+
+  <!-- Research and program cards, each linking to its panel on work.html -->
+  <section class="band" id="work">
+    <div class="wrap">
+      <h2>Our Work</h2>
+      <div class="grid">
+        <a class="card card-link" href="work.html#microbiome">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="19"/><circle cx="18" cy="18.5" r="3.5"/><circle cx="29.5" cy="17" r="2.2"/><circle cx="27" cy="29" r="4.5"/><circle cx="16" cy="30" r="2"/></svg></span>
+          <h3>Microbiome and Disease</h3>
+          <p>How the microbes in and on us change with skin, breast, and colorectal cancers and other diseases.</p>
+        </a>
+        <a class="card card-link" href="work.html#ai">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><rect x="14" y="14" width="20" height="20" rx="3"/><circle cx="24" cy="24" r="4"/><path d="M20 14V8M28 14V8M20 34v6M28 34v6M14 20H8M14 28H8M34 20h6M34 28h6" stroke-linecap="round"/></svg></span>
+          <h3>AI and Human Flourishing</h3>
+          <p>Directing Loyola's AIHF minor and leading faculty workshops on generative AI in STEM teaching.</p>
+        </a>
+        <a class="card card-link" href="work.html#character">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 41V21" stroke-linecap="round"/><path d="M24 25c0-6-4-10-10-10 0 6 4 10 10 10z"/><path d="M24 21c0-6 4-10 10-10 0 6-4 10-10 10z"/></svg></span>
+          <h3>Character Education</h3>
+          <p>Co-leading a three-year Educating Character Initiative grant at Loyola.</p>
+        </a>
+        <a class="card card-link" href="work.html#assessment">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 40h32" stroke-linecap="round"/><path d="M15 40V26M24 40V14M33 40V32" stroke-linecap="round"/></svg></span>
+          <h3>Program Assessment</h3>
+          <p>Assessment Faculty Fellow in the Provost's Office.</p>
+        </a>
+        <a class="card card-link" href="teaching.html">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M24 16c-3-3-7-4-12-4H8v24h4c5 0 9 1 12 4 3-3 7-4 12-4h4V12h-4c-5 0-9 1-12 4z"/><path d="M24 16v24"/></svg></span>
+          <h3>Teaching</h3>
+          <p>Cell biology, metagenomics, global biological risks, and courses co-taught with philosophy.</p>
+        </a>
+        <a class="card card-link" href="work.html#public-communication">
+          <span class="icon" aria-hidden="true"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="5"/><path d="M15 15a13 13 0 0 0 0 18M33 15a13 13 0 0 1 0 18M9 9a21 21 0 0 0 0 30M39 9a21 21 0 0 1 0 30" stroke-linecap="round"/></svg></span>
+          <h3>Science Communication</h3>
+          <p>Public talks on science, ethics, and religion, and outreach with community partners.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications: rendered from data/publications.json. Papers from the past 24 months
+       (RECENT_MONTHS in the script below) are listed, older ones sit behind the button. -->
+  <section class="band" id="publications">
+    <div class="wrap">
+      <h2>Lab Publications <a class="h-link" href="https://pubmed.ncbi.nlm.nih.gov/?term=Burns+MB%5BAuthor%5D&amp;sort=date">[PubMed]</a></h2>
+      <ul class="pub-list" id="pub-list">
+        <li class="pub"><span class="year"></span><span class="meta">Loading publications from PubMed&hellip;</span></li>
+      </ul>
+      <details class="older">
+        <summary class="btn btn-ghost"><span class="show">Older publications</span><span class="hide">Hide older publications</span></summary>
+        <ul class="pub-list" id="pub-list-older"></ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- Talks given by Dr. Burns, then talks given by students, mentees and collaborators.
+       Both come from data/abstracts.json (generated) and data/abstracts-manual.json.
+       Each shows the past 24 months, with older ones behind the button. -->
+  <section class="band" id="talks">
+    <div class="wrap">
+      <h2>Lab Presentations</h2>
+      <ul class="pub-list" id="talk-list">
+        <li class="pub"><span class="year"></span><span class="meta">Loading&hellip;</span></li>
+      </ul>
+      <details class="older">
+        <summary class="btn btn-ghost"><span class="show">Older presentations</span><span class="hide">Hide older presentations</span></summary>
+        <ul class="pub-list" id="talk-list-older"></ul>
+      </details>
+    </div>
+  </section>
+
+  <section class="band" id="student-talks">
+    <div class="wrap">
+      <h2>Student, Mentee, and Collaborator Presentations</h2>
+      <ul class="pub-list" id="student-talk-list">
+        <li class="pub"><span class="year"></span><span class="meta">Loading&hellip;</span></li>
+      </ul>
+      <details class="older">
+        <summary class="btn btn-ghost"><span class="show">Older presentations</span><span class="hide">Hide older presentations</span></summary>
+        <ul class="pub-list" id="student-talk-list-older"></ul>
+      </details>
+    </div>
+  </section>
+
+  <!-- Principal investigator -->
+  <section class="band" id="pi">
+    <div class="wrap">
+      <h2>Michael Burns, PhD</h2>
+      <div class="pi">
+        <figure class="figure">
+          <div class="frame"><img src="images/people/michael-burns.jpg" alt="Portrait of Michael Burns"></div>
+        </figure>
+        <div>
+          <p>Associate Professor in the Department of Biology and the Bioinformatics Program,
+          and Director of the Artificial Intelligence and Human Flourishing Program at Loyola
+          University Chicago.</p>
+          <p>The lab is on the 4th floor of the Quinlan Life Sciences Building on the Lakeshore
+          campus.</p>
+          <div class="actions">
+            <a class="btn btn-ghost" href="people.html">Everyone in the lab</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid people">
+        <div class="person">
+          <img class="portrait" src="images/people/shreya-bhagi.jpg" alt="">
+          <div><div class="name">Shreya Bhagi</div><div class="role">Bioinformatics MS student</div><div class="note">2024-25 Mulcahy Fellow</div></div>
+        </div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">TT</div>
+          <div><div class="name">Teo Tran</div><div class="role">Bioinformatics BS/MS student</div></div>
+        </div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">JE</div>
+          <div><div class="name">Jannah Eladl</div><div class="role">Undergraduate researcher</div><div class="note">WISER Fellow 2024, Mulcahy Fellow 2025</div></div>
+        </div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">DA</div>
+          <div><div class="name">Dania Achmar</div><div class="role">Undergraduate researcher</div><div class="note">USRE Fellow 2024</div></div>
+        </div>
+        <div class="person">
+          <div class="avatar" aria-hidden="true">KS</div>
+          <div><div class="name">Kendall Saunders</div><div class="role">Undergraduate researcher</div><div class="note">USRE Fellow 2026</div></div>
+        </div>
+        <div class="person">
+          <img class="portrait" src="images/people/owen-cooper.jpg" alt="">
+          <div><div class="name">Owen Cooper</div><div class="role">Undergraduate researcher</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recruiting -->
+  <section class="band band-photo" id="join" style="background-image: url(images/campus/campus-aerial.jpg);">
+    <div class="wrap">
+      <h2>Join the Lab</h2>
+      <p>We're always looking for motivated postdocs, staff scientists, graduate students, and
+      undergraduates. Some experience with R, Python, or the shell, and with statistics, helps.
+      Send a CV and a short cover letter to mburns16@luc.edu. Loyola undergraduates should also
+      apply through the Biology Undergraduate Research Portal.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="band" id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div class="grid contact-grid">
+        <div>
+          <h3>Email</h3>
+          <p class="value">mburns16@luc.edu</p>
+        </div>
+        <div>
+          <h3>Phone</h3>
+          <p class="value">Office 773-508-3637<br>Lab 773-508-2340</p>
+        </div>
+        <div>
+          <h3>Rooms</h3>
+          <p class="value">Office, Quinlan LSB 424<br>Lab, Quinlan LSB 455</p>
+        </div>
+        <div>
+          <h3>Mail</h3>
+          <p>Burns Lab, Loyola University Chicago<br>
+          Quinlan Life Sciences Building, Room 317<br>
+          1050 W. Sheridan Road, Chicago, IL 60626</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <img src="images/logos/burns-lab-mark.png" alt="">
+      <div>Burns Lab, Department of Biology, Loyola University Chicago<br>
+      Campus photos by Natalie Battaglia</div>
+    </div>
+    <div><a href="people.html">People</a> &middot; <a href="work.html">Work</a> &middot; <a href="index.html#contact">Contact</a></div>
+  </div>
+</footer>
+
+<script>
+// ---- settings ----------------------------------------------------------
+const LEAD = 3;            // authors always shown at the start of a citation
+const RECENT_MONTHS = 24;  // papers and talks this recent are listed; older ones sit behind the button
+const OLDEST = "2017";     // talks before this year are left off entirely
+// ------------------------------------------------------------------------
+
+// Is this author one of ours? PubMed writes authors as "Lastname II", so match on
+// surname plus first initial against data/lab-authors.json
+// (rebuilt by scripts/update-lab-authors.sh).
+const isLab = (lab, a) => {
+  const i = a.lastIndexOf(" ");
+  if (i < 0) return false;
+  const last = a.slice(0, i).toLowerCase(), initials = a.slice(i + 1);
+  return lab.some(p => p.last.toLowerCase() === last && initials.startsWith(p.initial));
+};
+
+// Author line: the first few authors plus anyone from the lab, in bold, however deep in the list.
+const authorLine = (lab, authors) => {
+  const names = authors.split(", ");
+  const shown = [];
+  let prev = -1;
+  names.forEach((n, i) => {
+    if (i >= LEAD && !isLab(lab, n)) return;
+    if (prev >= 0 && i > prev + 1) shown.push("&hellip;");
+    shown.push(isLab(lab, n) ? "<b>" + n + "</b>" : n);
+    prev = i;
+  });
+  if (prev < names.length - 1) shown.push("et al.");
+  return shown.join(", ");
+};
+
+// The lists below load after the page does and push everything under them down, so a
+// link like index.html#contact would land in the wrong spot. Jump again once they are in.
+const jumpToHash = () => {
+  const target = location.hash && document.getElementById(location.hash.slice(1));
+  if (target) target.scrollIntoView();
+};
+
+// Recent or older? A record's "date" (YYYY-MM-DD, or YYYY-MM) decides which side of the
+// cutoff it lands on. A record with only a year is compared by year alone, which puts it
+// on the older side in the cutoff's own year, so give recent ones a date.
+const since = new Date();
+since.setMonth(since.getMonth() - RECENT_MONTHS);
+const CUTOFF = since.toISOString().slice(0, 10);   // e.g. "2024-10-20"
+const when = r => r.date || r.year;
+const newestFirst = (a, b) => when(b).localeCompare(when(a));
+
+// Fill one section: recent rows in its list, the rest behind its "Older" button.
+const fillList = (id, rows, row) => {
+  const recent = rows.filter(r => when(r) >= CUTOFF);
+  const older = rows.filter(r => when(r) < CUTOFF);
+  document.getElementById(id).innerHTML = recent.length
+    ? recent.map(row).join("")
+    : `<li class="pub"><span class="year"></span><span class="meta">Nothing in the past ${RECENT_MONTHS} months.</span></li>`;
+  const olderList = document.getElementById(id + "-older");
+  olderList.innerHTML = older.map(row).join("");
+  olderList.closest("details").hidden = older.length === 0;
+};
+
+const labReady = fetch("data/lab-authors.json").then(r => r.json()).catch(() => []);
+
+// Publications. data/publications.json comes from scripts/update-publications.sh;
+// data/publications-manual.json holds papers PubMed has not indexed yet (no PMID, so link the DOI).
+Promise.all([
+  labReady,
+  fetch("data/publications.json").then(r => r.json()),
+  fetch("data/publications-manual.json").then(r => r.json()).catch(() => [])
+]).then(([lab, pubmed, extra]) => {
+  const papers = pubmed.concat(extra).sort(newestFirst);
+  fillList("pub-list", papers, p => {
+    const link = p.pmid ? `https://pubmed.ncbi.nlm.nih.gov/${p.pmid}/` : `https://doi.org/${p.doi}`;
+    return `<li class="pub">
+        <span class="year">${p.year}</span>
+        <span>
+          <a class="title" href="${link}">${p.title}</a>
+          <span class="meta">${authorLine(lab, p.authors)} &middot; <em>${p.journal}</em></span>
+        </span>
+      </li>`;
+  });
+})
+.catch(() => {
+  document.getElementById("pub-list").innerHTML =
+    '<li class="pub"><span class="year"></span><span class="meta">Publication list is temporarily unavailable.</span></li>';
+})
+.finally(jumpToHash);
+
+// Talks, posters and panels. data/abstracts.json is generated from Crossref by
+// scripts/update-abstracts.sh; data/abstracts-manual.json holds everything with no DOI.
+const talkRow = (lab, r, showPresenter) => {
+  const title = r.link ? `<a class="title" href="${r.link}">${r.title}</a>`
+                       : `<span class="title">${r.title}</span>`;
+  const detail = [r.meeting, r.where, r.number ? "abstract " + r.number : "", r.type]
+                 .filter(Boolean).join(" &middot; ");
+  const by = showPresenter && r.presenter
+             ? `<span class="meta presenter">Presented by ${r.presenter}</span>` : "";
+  return `<li class="pub">
+      <span class="year">${r.year}</span>
+      <span>
+        ${title}
+        ${by}
+        <span class="meta">${authorLine(lab, r.authors)}</span>
+        <span class="meta">${detail}</span>
+      </span>
+    </li>`;
+};
+
+Promise.all([
+  labReady,
+  fetch("data/abstracts.json").then(r => r.json()),
+  fetch("data/abstracts-manual.json").then(r => r.json()).catch(() => [])
+]).then(([lab, auto, manual]) => {
+  const all = auto.concat(manual)
+    .filter(r => r.year >= OLDEST)
+    .sort(newestFirst);
+  fillList("talk-list", all.filter(r => r.presented_by === "burns"), r => talkRow(lab, r, false));
+  fillList("student-talk-list", all.filter(r => r.presented_by !== "burns"), r => talkRow(lab, r, true));
+})
+.catch(() => {
+  document.getElementById("talk-list").innerHTML =
+    '<li class="pub"><span class="year"></span><span class="meta">List is temporarily unavailable.</span></li>';
+})
+.finally(jumpToHash);
+</script>
+
+</body>
+</html>

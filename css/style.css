@@ -1,0 +1,500 @@
+/* ============================================================
+   Burns Lab site styles
+   One stylesheet for the whole site. Sections below, in order:
+   1. Design tokens (colors, type, spacing)
+   2. Base elements
+   3. Layout helpers
+   4. Header / navigation
+   5. Hero
+   6. Cards and grids (research, people, courses)
+   7. Publications
+   8. Contact and footer
+   Change a color or font once in section 1 and it updates everywhere.
+   ============================================================ */
+
+/* ---------- 1. Design tokens -------------------------------
+   Layout: single centered column, max 1100px, sections split by
+   hairline rules; cards only where items are genuinely separate.  */
+
+:root {
+  /* Light palette (the default) */
+  --bg:        #fdfdfc;   /* page background            */
+  --surface:   #f3f2ee;   /* cards, quiet panels        */
+  --ink:       #1c1b19;   /* body text                  */
+  --muted:     #6a665f;   /* captions, secondary text   */
+  --line:      #e0ddd6;   /* hairlines and borders      */
+  --accent:    #6d1b24;   /* Loyola maroon: links, heads */
+  --accent-2:  #9a7420;   /* gold: eyebrows, accents    */
+
+  /* Type */
+  --display: "Spectral", Georgia, "Times New Roman", serif;
+  --body:    "Public Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono:    "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Spacing scale */
+  --gap:     1.25rem;
+  --section: 4.5rem;
+  --radius:  4px;
+}
+
+/* Dark palette for people whose system is set to dark mode */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg:       #16161a;
+    --surface:  #1f1f24;
+    --ink:      #eceae5;
+    --muted:    #a5a098;
+    --line:     #32323a;
+    --accent:   #e2949c;
+    --accent-2: #d6ab52;
+    color-scheme: dark;
+  }
+}
+
+/* Same values again, for an explicit dark choice */
+:root[data-theme="dark"] {
+  --bg:       #16161a;
+  --surface:  #1f1f24;
+  --ink:      #eceae5;
+  --muted:    #a5a098;
+  --line:     #32323a;
+  --accent:   #e2949c;
+  --accent-2: #d6ab52;
+  color-scheme: dark;
+}
+
+/* ---------- 2. Base elements ------------------------------- */
+
+* { box-sizing: border-box; }
+
+/* Leave room for the sticky header when a link jumps to a #section */
+html { scroll-padding-top: 6rem; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.15;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h1 { font-size: clamp(2.1rem, 5.2vw, 3.3rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.1rem); }
+h3 { font-size: 1.2rem; }
+
+p { margin: 0 0 1rem; max-width: 68ch; }
+h2 + p { margin-top: 1rem; }
+
+/* Small link that sits inside a heading, e.g. "Lab Publications [PubMed]" */
+.h-link { font-family: var(--body); font-size: 0.55em; font-weight: 400; vertical-align: middle; }
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 3px; }
+
+/* Small uppercase label used above section headings */
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  margin: 0 0 0.6rem;
+}
+
+/* ---------- 3. Layout helpers ------------------------------ */
+
+.wrap {
+  width: 100%;
+  max-width: 1100px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;   /* side gutter at every width */
+}
+
+section.band {
+  padding-block: var(--section);
+  border-top: 1px solid var(--line);
+}
+
+.lede { font-size: 1.15rem; color: var(--muted); }
+
+/* ---------- 4. Header / navigation ------------------------- */
+
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.6rem 1.5rem;
+  padding-block: 0.9rem;
+}
+
+.brand { margin-right: auto; display: flex; align-items: center; }
+/* The logo is black line art, so flip it to near-white in dark mode. */
+.brand img { height: 34px; width: auto; display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand img { filter: invert(1) brightness(0.92); }
+}
+:root[data-theme="dark"] .brand img { filter: invert(1) brightness(0.92); }
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  font-size: 0.93rem;
+}
+.site-nav a { color: var(--muted); text-decoration: none; }
+.site-nav a:hover,
+.site-nav a[aria-current="page"] { color: var(--accent); }
+
+/* ---------- 5. Hero ---------------------------------------- */
+
+.hero { padding-block: clamp(3rem, 8vw, 5.5rem) var(--section); }
+.hero h1 { max-width: 16ch; }
+.hero p { margin-top: 1.25rem; font-size: 1.2rem; max-width: 60ch; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.15rem;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.btn-solid { background: var(--accent); color: var(--bg); }
+.btn-ghost { color: var(--accent); }
+.btn:hover { opacity: 0.85; }
+
+
+/* ---------- 5b. Photo banners -------------------------------
+   A page can open on a photo instead of a plain heading. Text sits on a
+   darkened image, so these colors are fixed rather than theme tokens. */
+
+.hero-photo {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: grid;
+  align-items: end;
+  min-height: clamp(320px, 50vh, 540px);
+}
+.hero-photo .hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+/* Dark wash so white type stays readable over any photo */
+.hero-photo::after {
+  content: "";
+  position: absolute; inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(20,11,13,0.30) 0%, rgba(20,11,13,0.80) 78%);
+}
+.hero-photo .hero-body { padding-block: 3.5rem 2.75rem; }
+.hero-photo h1 { color: #fff; }
+.hero-photo .lede { color: rgba(255,255,255,0.88); }
+.hero-photo .eyebrow { color: #e3bc63; }
+.hero-photo .btn-solid { background: #fff; color: #6d1b24; border-color: #fff; }
+.hero-photo .btn-ghost { color: #fff; border-color: rgba(255,255,255,0.65); }
+
+/* Full-width photo band partway down a page. The background sits still while
+   the page scrolls over it, except on phones and for reduced-motion viewers. */
+.band-photo {
+  position: relative;
+  border-top: 0;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+.band-photo::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(20,11,13,0.74);
+}
+.band-photo .wrap { position: relative; }
+.band-photo h2 { color: #fff; }
+.band-photo p { color: rgba(255,255,255,0.88); }
+.band-photo .eyebrow { color: #e3bc63; }
+.band-photo a { color: #fff; }
+@media (max-width: 820px) { .band-photo { background-attachment: scroll; } }
+@media (prefers-reduced-motion: reduce) { .band-photo { background-attachment: scroll; } }
+
+/* ---------- 6. Cards and grids ----------------------------- */
+
+/* Auto-fitting grid: columns collapse to one on a phone */
+.grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 2rem;
+}
+.grid > * { min-width: 0; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.4rem;
+}
+.card h3 { margin-bottom: 0.5rem; color: var(--accent); }
+.card p { font-size: 0.97rem; margin-bottom: 0; color: var(--muted); }
+.card .code { font-family: var(--mono); font-size: 0.78rem; margin-bottom: 0.5rem; }  /* course numbers */
+.card .links { font-size: 0.9rem; margin-top: 0.9rem; }                              /* links under a panel */
+
+/* A whole card that is a link (the "what we work on" grid) */
+.card-link { display: block; text-decoration: none; color: inherit; transition: border-color 0.15s ease; }
+.card-link h3 { color: var(--accent); }
+.card-link:hover { border-color: var(--accent); }
+
+/* People */
+.people { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+
+.person { display: flex; gap: 0.9rem; align-items: center; }
+
+/* Placeholder avatar: initials until real photos are added to
+   images/people/. Swap this div for an <img> when they are. */
+.avatar {
+  flex: 0 0 auto;
+  width: 54px; height: 54px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+}
+.person .name { font-weight: 600; line-height: 1.3; }
+.person .role { font-size: 0.88rem; color: var(--muted); line-height: 1.35; }
+.person .note { font-size: 0.82rem; color: var(--accent-2); }
+
+/* Subheading inside a list-heavy section */
+.subhead { margin-top: 2.25rem; font-size: 1.05rem; color: var(--accent); }
+
+/* Long alumni lists set in columns */
+.namelist {
+  columns: 3 180px;
+  column-gap: 2rem;
+  margin-top: 1.25rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.namelist li { break-inside: avoid; padding-block: 0.12rem; }
+
+/* ---------- 6b. Images and media ---------------------------- */
+
+/* Wrapper for any photo: fixes the shape, crops the photo to fit,
+   and keeps a caption attached. Set the shape with --ratio. */
+.figure { margin: 0; }
+.figure .frame {
+  aspect-ratio: var(--ratio, 16 / 9);
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.figure img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.hero-figure { margin-top: 2.5rem; --ratio: 21 / 9; }
+@media (max-width: 600px) { .hero-figure { --ratio: 4 / 3; } }
+
+/* Two items side by side (text and a photo, or two photos), stacking on a phone */
+.media-pair { display: grid; gap: 2rem; grid-template-columns: 1fr 1fr; align-items: center; }
+@media (max-width: 600px) { .media-pair { grid-template-columns: 1fr; } }
+
+/* Line-art icons on the research cards, drawn to match the logo */
+.card .icon { display: block; margin-bottom: 0.9rem; color: var(--accent); }
+.card .icon svg { width: 44px; height: 44px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+/* Principal investigator block: photo beside the text */
+.pi { display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: 1.75rem; align-items: start; margin-top: 2rem; }
+@media (max-width: 560px) { .pi { grid-template-columns: 1fr; } }
+.pi .figure { --ratio: 1 / 1; }
+
+/* Real portrait in a person card, same size as the initials circle */
+.person .portrait {
+  flex: 0 0 auto;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+}
+
+/* Current members on people.html: a narrow, centered stack of cards over a
+   campus photo, one person per card. The home page keeps the compact .people grid. */
+.members-band h2 { text-align: center; }
+.roster { display: grid; gap: 1rem; max-width: 37rem; margin: 2rem auto 0; }
+.roster .person {
+  gap: 2rem;
+  padding: 1.5rem 2rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+}
+.roster .portrait, .roster .avatar { width: 180px; height: 180px; }
+.roster .avatar { font-size: 2.4rem; }
+.roster .name { font-size: 1.35rem; letter-spacing: 0.02em; }
+.roster .role { font-size: 1.02rem; margin-top: 0.2rem; }
+.roster .note { font-size: 0.95rem; }
+@media (max-width: 560px) {
+  .roster .person { gap: 1.1rem; padding: 1.1rem; }
+  .roster .portrait, .roster .avatar { width: 160px; height: 160px; }
+  .roster .avatar { font-size: 1.6rem; }
+  .roster .name { font-size: 1.15rem; }
+}
+
+/* Alumni and collaborator lists: one panel, each group's label on the left
+   (set off by a thin rule) and its names in two columns on the right. */
+.list-panel { background: var(--surface); border-radius: var(--radius); padding: 2.25rem; margin-top: 1.5rem; }
+.list-row { display: grid; grid-template-columns: 13rem 1fr; gap: 2rem; }
+.list-row + .list-row { margin-top: 2.5rem; }
+.list-row h3 {
+  font-family: var(--body);
+  font-size: 0.98rem;
+  line-height: 1.4;
+  color: var(--accent);
+  padding-right: 1.5rem;
+  border-right: 1px solid var(--line);
+}
+.list-row .namelist { columns: 2 200px; margin-top: 0; }
+@media (max-width: 640px) {
+  .list-panel { padding: 1.25rem; }
+  .list-row { grid-template-columns: 1fr; gap: 0.6rem; }
+  .list-row h3 { border-right: 0; padding-right: 0; }
+}
+
+/* ---------- 6c. Events timeline and photo gallery ----------- */
+
+.timeline { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 3rem; }
+.event { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1.5rem; align-items: start; }
+.event > div { min-width: 0; }
+.event .when {
+  font-family: var(--mono);
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  padding-top: 0.3rem;
+}
+.event h3 { margin-bottom: 0.35rem; }
+.event .where { font-size: 0.92rem; color: var(--muted); margin-bottom: 0.6rem; }
+.event-link { font-size: 0.95rem; margin-bottom: 0; }
+.event-photos {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  max-width: 620px;
+  margin-top: 1.1rem;
+}
+.event-photos .figure { --ratio: 3 / 2; }
+.event .credit { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
+@media (max-width: 620px) {
+  .event { grid-template-columns: 1fr; gap: 0.35rem; }
+  .event .when { padding-top: 0; }
+}
+
+.gallery {
+  list-style: none; padding: 0; margin: 2rem 0 0;
+  display: grid; gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.snap > * { min-width: 0; }
+.snap .figure { --ratio: 4 / 3; margin-bottom: 0.9rem; }
+.snap h3 { font-size: 1.05rem; margin-bottom: 0.3rem; }
+.snap p { font-size: 0.95rem; color: var(--muted); }
+
+/* ---------- 7. Publications -------------------------------- */
+
+.pub-list { margin-top: 1.75rem; padding: 0; list-style: none; }
+.pub {
+  padding-block: 1rem;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1rem;
+}
+.pub:first-child { border-top: 0; }
+.pub .year {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent-2);
+  font-variant-numeric: tabular-nums;
+}
+.pub .title { font-weight: 600; display: block; color: var(--ink); text-decoration: none; }
+.pub .title:hover { color: var(--accent); text-decoration: underline; }
+.pub .meta { display: block; font-size: 0.92rem; color: var(--muted); }
+.pub .meta b { color: var(--ink); font-weight: 600; }  /* the lab's own author line */
+.pub .presenter { color: var(--accent); font-weight: 600; }
+
+/* "Older presentations" button: a <details> whose <summary> is styled as a button */
+.older { margin-top: 1.25rem; }
+.timeline + .older { margin-top: 3rem; }   /* match the gap between events */
+.older > summary { list-style: none; cursor: pointer; }
+.older > summary::-webkit-details-marker { display: none; }
+.older[open] .show, .older:not([open]) .hide { display: none; }
+@media (max-width: 480px) {
+  .pub { grid-template-columns: 1fr; gap: 0.25rem; }
+}
+
+/* Marks content that is a formatting example, not real data */
+.placeholder {
+  border-left: 3px solid var(--accent-2);
+  background: var(--surface);
+  padding: 0.9rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--muted);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ---------- 8. Contact and footer -------------------------- */
+
+.contact-grid { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+.contact-grid h3 { font-family: var(--body); font-size: 0.95rem; letter-spacing: 0.02em; }
+.contact-grid p { font-size: 0.97rem; color: var(--muted); margin-bottom: 0; }
+.contact-grid .value { color: var(--ink); font-family: var(--mono); font-size: 0.92rem; }
+
+.site-footer {
+  border-top: 1px solid var(--line);
+  padding-block: 2.5rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.footer-brand { display: flex; align-items: center; gap: 0.9rem; }
+.footer-brand img { height: 40px; width: auto; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .footer-brand img { filter: invert(1) brightness(0.9); }
+}
+:root[data-theme="dark"] .footer-brand img { filter: invert(1) brightness(0.9); }
+
+.site-footer .wrap { display: flex; flex-wrap: wrap; gap: 1rem 2rem; justify-content: space-between; }
+.site-footer a { color: var(--muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}

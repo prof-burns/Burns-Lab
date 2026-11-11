@@ -1,0 +1,9 @@
+# Conference abstracts to fetch by DOI, one per line.
+# The journal sweep in update-abstracts.sh ranks by relevance, so in a huge journal
+# like Cancer Research it never reaches these. Listing the DOI makes it certain.
+10.1158/1538-7445.am2011-lb-193      # AACR Annual Meeting 2011, LB-193
+10.1158/0008-5472.sabcs13-s6-05      # San Antonio Breast Cancer Symposium 2013, S6-05
+10.1158/1535-7163.targ-13-a242       # AACR-NCI-EORTC Molecular Targets 2013, A242
+10.1158/1557-3125.advbc15-b43        # AACR Advances in Breast Cancer Research 2015, B43
+10.1158/1538-7445.sabcs15-p4-08-02   # San Antonio Breast Cancer Symposium 2015, P4-08-02
+10.1016/j.jaad.2023.07.032           # AAD Annual Meeting 2023, 44183 (sweep ranking drops it some runs)

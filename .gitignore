@@ -1,0 +1,14 @@
+# Full-size originals and the variants they were cropped from.
+# Kept on disk so nothing is lost, kept out of the repo so it stays light.
+images/_unused/
+
+# Private working material that lives in this folder but must never be published:
+# CV drafts, unpublished abstracts and theses, and the original photos (which carry GPS).
+2026_Full_CV_V0/
+Data_for_Reference/
+Additional Photos*/
+images/people/unidentified/
+*.heic
+*.HEIC
+
+.DS_Store

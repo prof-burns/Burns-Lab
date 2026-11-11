@@ -1,0 +1,5 @@
+# PMIDs to leave off the website, one per line.
+# A PubMed author search matches on name, so it can pick up a different M Burns.
+# These two look like someone else to me, but check before trusting that:
+38193853  # Stress Health, adolescent emotion regulation and COVID-19 lockdown
+31474591  # J Rheumatol, quality of care in childhood-onset lupus
