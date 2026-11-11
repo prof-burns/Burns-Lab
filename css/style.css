@@ -334,6 +334,8 @@ section.band {
 /* Line-art icons on the research cards, drawn to match the logo */
 .card .icon { display: block; margin-bottom: 0.9rem; color: var(--accent); }
 .card .icon svg { width: 44px; height: 44px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+/* ICON TOGGLE: icons are hidden for now. Delete this one line to bring them back. */
+.card .icon { display: none; }
 
 /* Principal investigator block: photo beside the text */
 .pi { display: grid; grid-template-columns: minmax(0, 220px) 1fr; gap: 1.75rem; align-items: start; margin-top: 2rem; }
