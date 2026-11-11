@@ -12,4 +12,7 @@ images/people/unidentified/
 *.heic
 *.HEIC
 
+# Working notes for picking the project back up (names accounts and private folders)
+HANDOFF.md
+
 .DS_Store
